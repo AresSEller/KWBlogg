@@ -1,0 +1,47 @@
+﻿@model IEnumerable<KWBlogg.Models.BlogPost>
+
+
+@{
+    ViewBag.Title = "BlogPosts";
+}
+
+
+<h2>BlogPosts</h2>
+<hr />
+
+
+<article>
+    <div class="row">
+        @foreach (var post in Model)
+        {
+            <div class="span8">
+                <div class="post-image">
+                    <div class="post-heading">
+                        <h3>@post.Title</h3>
+                    </div>
+                    @if (post.MediaURL != null)
+                    {
+                    <img class="img-responsive" src="@post.MediaURL" alt="">
+                    }
+                </div>
+
+            </div>
+            <div class="span4">
+                <div class="meta-post">
+                    <ul>
+                        <li><i class="icon-file"></i></li>
+                        <li>By <a href="#" class="author">Ares E.</a></li>
+                        <li>On <a href="#" class="date">@post.Created</a></li>
+                        @*<li>Tags: <a href="#">@Model.Tags</a></li>*@
+                    </ul>
+                </div>
+                <div class="post-entry">
+                    <div>
+                        @Html.Raw(post.Abstract)
+                    </div>
+                    @Html.ActionLink("read more", "Details", new { slug = post.Slug })
+                </div>
+            </div>
+        }
+    </div>
+</article>
